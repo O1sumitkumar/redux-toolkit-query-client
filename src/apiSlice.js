@@ -10,10 +10,21 @@ export const api = createApi({
   tagTypes: ["Tasks"],
   endpoints: (builder) => ({
     getTasks: builder.query({
-      query: () => "/tasks",
-      transformResponse: (tasks) => tasks.reverse(),
+      query: (userId) => ({
+        url: "/tasks",
+        body: userId,
+        transformResponse: (tasks) => tasks.reverse(),
+      }),
       providesTags: ["Tasks"],
     }),
+    login: builder.mutation({
+      query: (payload) => ({
+        url: "/login",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+
     addTask: builder.mutation({
       query: (payload) => ({
         url: "/tasks",
@@ -89,4 +100,5 @@ export const {
   useAddTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
+  useLoginMutation,
 } = api;

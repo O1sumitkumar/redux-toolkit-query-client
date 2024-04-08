@@ -9,7 +9,15 @@ import {
 } from "./apiSlice";
 
 export default function Home() {
-  const { data: tasksList, isError, isLoading, error } = useGetTasksQuery();
+  const {
+    data: tasksList,
+    isError,
+    isLoading,
+    error,
+  } = useGetTasksQuery({
+    userId: userId,
+  });
+
   const [newTask, setNewTask] = useState("");
   const [addTask] = useAddTaskMutation();
   const [updateTask] = useUpdateTaskMutation();
